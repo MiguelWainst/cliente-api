@@ -24,13 +24,4 @@ public record ClienteDTO(
         @NotBlank(message = "CPF é obrigatório.")
         String cpf
 ) {
-
-    public Cliente mapearParaCliente() {
-        Cliente cliente = new Cliente();
-        cliente.setNome(this.nome);
-        cliente.setDataNascimento(this.dataNascimento);
-        cliente.setEmail(this.email);
-        cliente.setCpf(this.cpf);
-        return cliente;
-    }
 }

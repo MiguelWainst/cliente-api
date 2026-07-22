@@ -8,6 +8,7 @@ import miguel_stein.ClienteAPI.model.entity.Cliente;
 import miguel_stein.ClienteAPI.service.ClienteService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -24,6 +25,7 @@ public class ClienteController {
     private final ClienteMapper mapper;
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> salvarCliente(@RequestBody @Valid ClienteDTO clienteDTO) {
         Cliente cliente = clienteDTO.mapearParaCliente();
         clienteService.salvar(cliente);
@@ -78,26 +80,6 @@ public class ClienteController {
         return ResponseEntity.ok().body(clienteDTO);
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<ClienteDTO>> acharTodos() {
-//        List<Cliente> listCliente= clienteService.acharTodos();
-//        List<ClienteDTO> clienteDTOS = listCliente
-//                .stream()
-//                .map(mapper::toDTO)
-//                .toList();
-//        return ResponseEntity.ok(clienteDTOS);
-//    }
-
-//    @GetMapping("nomes")
-//    public ResponseEntity<List<ClienteDTO>> listarPorNome(@RequestParam String nome) {
-//        List<Cliente> clientes = clienteService.listarClientesPorNome(nome);
-//        List<ClienteDTO> clientesDTOS = clientes.
-//                stream().
-//                map(mapper::toDTO)
-//                .toList();
-//        return ResponseEntity.ok(clientesDTOS);
-//    }
-
     @GetMapping("pesquisa")
     public ResponseEntity<Page<ClienteDTO>> pesquisaPorParam(
             @RequestParam(required = false, value = "nome") String nome,
@@ -111,6 +93,7 @@ public class ClienteController {
     }
 
     @DeleteMapping("{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deletarClientePorId(@PathVariable String id) {
         Optional<Cliente> clienteOptional = clienteService.acharPorId(UUID.fromString(id));
         if (clienteOptional.isEmpty()) {

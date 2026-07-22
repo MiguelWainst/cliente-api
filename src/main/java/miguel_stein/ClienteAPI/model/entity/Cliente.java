@@ -34,6 +34,10 @@ public class Cliente {
     @LastModifiedDate
     private LocalDateTime dataAtualizacao;
 
+    @ManyToOne
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
+    private Usuario usuario;
+
     public Cliente() {
     }
 }

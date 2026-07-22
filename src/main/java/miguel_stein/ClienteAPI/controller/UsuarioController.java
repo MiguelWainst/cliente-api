@@ -5,10 +5,7 @@ import miguel_stein.ClienteAPI.controller.dto.UsuarioDTO;
 import miguel_stein.ClienteAPI.controller.mapper.UsuarioMapper;
 import miguel_stein.ClienteAPI.service.UsuarioService;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -20,7 +17,7 @@ public class UsuarioController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void salvar(UsuarioDTO dto) {
+    public void salvar(@RequestBody UsuarioDTO dto) {
         usuarioService.salvar(mapper.toEntity(dto));
     }
 }

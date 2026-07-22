@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import miguel_stein.ClienteAPI.exception.OperacaoNaoPermitida;
 import miguel_stein.ClienteAPI.model.entity.Cliente;
 import miguel_stein.ClienteAPI.repository.ClienteRepository;
+import miguel_stein.ClienteAPI.security.SecurityService;
 import miguel_stein.ClienteAPI.validators.ClienteValidator;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,14 +24,17 @@ public class ClienteService {
 
     private final ClienteRepository clienteRepository;
     private final ClienteValidator clienteValidator;
+    private final SecurityService securityService;
 
     public Cliente salvar(Cliente cliente) {
         clienteValidator.validar(cliente);
+        cliente.setUsuario(securityService.obterUsuarioLogado());
         return clienteRepository.save(cliente);
     }
 
     public Cliente atualizar(Cliente cliente) {
         clienteValidator.validar(cliente);
+        cliente.setUsuario(securityService.obterUsuarioLogado());
         return clienteRepository.save(cliente);
     }
 
@@ -40,14 +44,6 @@ public class ClienteService {
 
     public Optional<Cliente> acharPorCpf(String cpf) {
         return clienteRepository.findByCpf(cpf);
-    }
-
-    public List<Cliente> acharTodos() {
-        return clienteRepository.listAllClienteOrderByName();
-    }
-
-    public List<Cliente> listarClientesPorNome(String nome) {
-        return clienteRepository.listAllClienteOrderByNomeContaining(nome);
     }
 
     public void deletarCliente(Cliente cliente) {

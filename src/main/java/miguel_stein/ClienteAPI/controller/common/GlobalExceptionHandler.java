@@ -4,7 +4,9 @@ import miguel_stein.ClienteAPI.controller.dto.ErroCampo;
 import miguel_stein.ClienteAPI.controller.dto.ErroResposta;
 import miguel_stein.ClienteAPI.exception.OperacaoNaoPermitida;
 import miguel_stein.ClienteAPI.exception.RegistroDuplicadoException;
+import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -44,6 +46,16 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErroResposta handlerOperacaoNaoPermitidaException(OperacaoNaoPermitida e) {
         return ErroResposta.padrao(e.getMessage());
+    }
+
+    @ExceptionHandler(AuthorizationDeniedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ErroResposta handlerAuthorizationDeniedException(AuthorizationDeniedException e) {
+        return new ErroResposta(
+                HttpStatus.FORBIDDEN.value(),
+                "Acesso negado",
+                List.of()
+        );
     }
 
     @ExceptionHandler(RuntimeException.class)
