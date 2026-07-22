@@ -3,7 +3,6 @@ package miguel_stein.ClienteAPI.model.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
 import java.util.List;
 import java.util.UUID;
@@ -23,7 +22,7 @@ public class Usuario {
     @Column
     private String senha;
 
-    @Column(name = "roles", columnDefinition = "varchar[]")
-    @JdbcTypeCode(SqlTypes.ARRAY)
+    @JdbcTypeCode(java.sql.Types.ARRAY)
+    @Column(columnDefinition = "varchar[]")
     private List<String> roles;
 }

@@ -1,4 +1,4 @@
-package miguel_stein.ClienteAPI.mapper;
+package miguel_stein.ClienteAPI.controller.mapper;
 
 import miguel_stein.ClienteAPI.controller.dto.ClienteDTO;
 import miguel_stein.ClienteAPI.model.entity.Cliente;

@@ -1,12 +1,14 @@
 package miguel_stein.ClienteAPI.controller.dto;
 
+import jakarta.validation.constraints.NotNull;
+
 import java.util.List;
-import java.util.UUID;
 
 public record UsuarioDTO(
-        UUID id,
-        String login,
-        String senha,
-        List<String> roles
+    @NotNull(message = "O login é obrigatório")
+    String login,
+    @NotNull(message = "A senha é obrigatória")
+    String password,
+    List<String> roles
 ) {
 }

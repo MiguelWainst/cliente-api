@@ -3,9 +3,7 @@ package miguel_stein.ClienteAPI.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import miguel_stein.ClienteAPI.controller.dto.ClienteDTO;
-import miguel_stein.ClienteAPI.controller.dto.ErroResposta;
-import miguel_stein.ClienteAPI.exception.RegistroDuplicadoException;
-import miguel_stein.ClienteAPI.mapper.ClienteMapper;
+import miguel_stein.ClienteAPI.controller.mapper.ClienteMapper;
 import miguel_stein.ClienteAPI.model.entity.Cliente;
 import miguel_stein.ClienteAPI.service.ClienteService;
 import org.springframework.data.domain.Page;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 

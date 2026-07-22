@@ -1,7 +1,6 @@
-
 create table usuarios(
-	id uuid not null primary key,
-	login varchar(30),
-	senha varchar(200),
-	roles varchar[]
+    id uuid primary key not null,
+    login varchar(35) not null,
+    senha varchar(200) not null,
+    roles varchar[]
 )
