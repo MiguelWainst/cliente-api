@@ -27,7 +27,7 @@ public class ClienteController {
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> salvarCliente(@RequestBody @Valid ClienteDTO clienteDTO) {
-        Cliente cliente = clienteDTO.mapearParaCliente();
+        Cliente cliente = mapper.toEntity(clienteDTO);
         clienteService.salvar(cliente);
 
         URI location = ServletUriComponentsBuilder
@@ -67,17 +67,6 @@ public class ClienteController {
         Cliente cliente = clienteOptional.get();
         ClienteDTO clienteDTO = mapper.toDTO(cliente);
         return ResponseEntity.ok(clienteDTO);
-    }
-
-    @GetMapping("cpf")
-    public ResponseEntity<ClienteDTO> acharPorCpf(@RequestParam String cpf) {
-        Optional<Cliente> clienteOptional = clienteService.acharPorCpf(cpf);
-        if (clienteOptional.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        Cliente cliente = clienteOptional.get();
-        ClienteDTO clienteDTO = mapper.toDTO(cliente);
-        return ResponseEntity.ok().body(clienteDTO);
     }
 
     @GetMapping("pesquisa")
