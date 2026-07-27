@@ -16,10 +16,10 @@ public class UsuarioValidator {
 
     public void validar(Usuario usuario) {
         if (usuario == null) {
-            throw new IllegalArgumentException("Usuário não pode ser nulo");
+            throw new IllegalArgumentException("Erro: Usuário não pode ser nulo");
         }
         if (usuarioRepetido(usuario)) {
-            throw new RegistroDuplicadoException("Usuário já existe");
+            throw new RegistroDuplicadoException("Erro: Usuário já existe");
         }
     }
 
