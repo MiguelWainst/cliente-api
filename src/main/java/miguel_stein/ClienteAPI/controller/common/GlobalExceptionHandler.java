@@ -53,7 +53,7 @@ public class GlobalExceptionHandler {
     public ErroResposta handlerAuthorizationDeniedException(AuthorizationDeniedException e) {
         return new ErroResposta(
                 HttpStatus.FORBIDDEN.value(),
-                "Acesso negado",
+                "Acesso negado: Proibido.",
                 List.of()
         );
     }
