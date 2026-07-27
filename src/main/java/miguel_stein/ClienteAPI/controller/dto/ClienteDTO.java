@@ -13,15 +13,15 @@ import java.util.UUID;
 
 public record ClienteDTO(
         UUID id,
-        @NotBlank(message = "Nome não pode ser nulo.")
+        @NotBlank(message = "O nome não pode ser nulo.")
         String nome,
         @Past(message = "A data deve ser uma data passada.")
-        @NotNull(message = "Data de nascimento é obrigatório.")
+        @NotNull(message = "A data de nascimento é obrigatória.")
         LocalDate dataNascimento,
-        @Email(message = "Formato de E-mail inválido.")
-        @NotBlank(message = "E-mail é obrigatório.")
+        @Email(message = "O Formato de E-mail inválido.")
+        @NotBlank(message = "O E-mail é obrigatório.")
         String email,
-        @NotBlank(message = "CPF é obrigatório.")
+        @NotBlank(message = "O CPF é obrigatório.")
         String cpf
 ) {
 }
